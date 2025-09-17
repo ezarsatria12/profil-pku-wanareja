@@ -4,6 +4,12 @@
 
 // Langkah 1: Muat semua file aplikasi inti (konfigurasi, fungsi, dll.)
 require_once __DIR__ . '/../app/bootstrap.php';
+require_once __DIR__ . '/../app/database.php';
+
+// Ambil 3 berita terbaru yang statusnya 'publish'
+$stmt = $pdo->prepare("SELECT * FROM berita WHERE status = 'publish' ORDER BY tanggal_publish DESC LIMIT 3");
+$stmt->execute();
+$beritas = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 // Langkah 2: Siapkan semua variabel yang dibutuhkan oleh template.
 // Ini menggantikan @section('title', 'Beranda') di Blade.

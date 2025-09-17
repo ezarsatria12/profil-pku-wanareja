@@ -80,3 +80,338 @@
     </div>
 
 </section>
+<section id="about-us" class="about-us section py-5">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title text-center mb-5">
+            <p class="text-uppercase" style="letter-spacing: 2px; color: #888;">LEBIH DEKAT</p>
+            <h2 class="fw-bold">Tentang Kami</h2>
+        </div>
+
+        <div class="row gy-4">
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-box text-center p-4 rounded shadow-sm w-100">
+                    <i class="bi bi-diagram-3-fill fs-1 text-primary mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Layanan Kesehatan Terpadu</h3>
+                    <p>Menyediakan berbagai layanan mulai dari UGD 24 jam, rawat jalan, rawat inap, hingga
+                        farmasi dalam satu lokasi untuk memudahkan koordinasi dan mempercepat proses penyembuhan
+                        pasien.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-box text-center p-4 rounded shadow-sm w-100">
+                    <i class="bi bi-patch-check-fill fs-1 text-primary mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Pelayanan Paripurna</h3>
+                    <p>Sebagai klinik terakreditasi "PARIPURNA", kami berkomitmen memberikan pelayanan
+                        bermutu tinggi dan selalu berupaya memenuhi tuntutan masyarakat akan pelayanan kesehatan
+                        berkualitas.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-box text-center p-4 rounded shadow-sm w-100">
+                    <i class="bi bi-moon-stars-fill fs-1 text-primary mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Berbasis Islami</h3>
+                    <p>Slogan kami "Ibadah dalam pelayanan dan kemanusiaan" tercermin dalam setiap pelayanan
+                        yang berprinsip pada Pedoman Hidup Islami Warga Muhammadiyah.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-box text-center p-4 rounded shadow-sm w-100">
+                    <i class="bi bi-people-fill fs-1 text-primary mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Tenaga Medis Profesional</h3>
+                    <p>Tim kami terdiri dari dokter, apoteker, perawat, analis, dan tenaga kesehatan lainnya
+                        yang profesional dan selalu berupaya meningkatkan kualitas sumber daya manusia (SDM).</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-box text-center p-4 rounded shadow-sm w-100">
+                    <i class="bi bi-building-fill-check fs-1 text-primary mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Fasilitas Lengkap & Standar</h3>
+                    <p>Dilengkapi fasilitas rawat inap dengan AC, laboratorium, farmasi, dan ambulans
+                        pribadi untuk memastikan penanganan pasien yang optimal dan sesuai standar medis.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-box text-center p-4 rounded shadow-sm w-100">
+                    <i class="bi bi-lightbulb-fill fs-1 text-primary mb-3"></i>
+                    <h3 class="fs-5 fw-bold">Inovasi dan Pengembangan</h3>
+                    <p>Kami terus mengembangkan profesionalisme sumber daya karyawan sesuai kebutuhan
+                        pelayanan untuk menjadi pusat pelayanan kesehatan yang kompetitif dan mampu bersaing.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="features" class="features section py-5">
+    <div class="container">
+
+        <div class="row gy-4 align-items-center">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Ruang+Tunggu"
+                            class="img-fluid rounded shadow-sm" alt="Ruang tunggu klinik">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Ruang+Rawat"
+                            class="img-fluid rounded shadow-sm" alt="Ruang rawat inap">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Poli+Gigi"
+                            class="img-fluid rounded shadow-sm" alt="Poli gigi">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Instalasi+Farmasi"
+                            class="img-fluid rounded shadow-sm" alt="Instalasi farmasi">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="ps-lg-5">
+                    <p class="text-uppercase" style="letter-spacing: 2px; color: #888;">SLOGAN KAMI</p>
+                    <h2 class="fw-bold display-6">Ibadah dalam Pelayanan dan Kemanusiaan.</h2>
+                    <p class="text-muted mt-3">
+                        Kami berupaya menjadi pusat pelayanan kesehatan yang profesional, bermutu tinggi,
+                        dan Islami, [cite: 69] serta selalu berkomitmen untuk memberikan pelayanan paripurna
+                        yang terjangkau bagi seluruh lapisan masyarakat.
+                    </p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Pelayanan Profesional & Islami.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>SDM yang Kompeten.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Terjangkau Bagi Masyarakat.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Unit Gawat Darurat 24 Jam.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="inpatient" class="inpatient section py-5 bg-light">
+    <div class="container">
+
+        <div class="row gy-4 align-items-center">
+            <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                <div class="pe-lg-5">
+                    <p class="text-uppercase" style="letter-spacing: 2px; color: #888;">RAWAT INAP</p>
+                    <h2 class="fw-bold display-6">Kamar Rawat Inap yang Bersih dan Nyaman.</h2>
+                    <p class="text-muted mt-3">
+                        Ruang rawat inap kami dirancang untuk menciptakan lingkungan yang tenang dan mendukung proses
+                        pemulihan Anda. Kami menyediakan berbagai fasilitas untuk memastikan kenyamanan pasien dan
+                        keluarga selama masa perawatan.
+                    </p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Kamar Pasien (AC + WC Dalam)</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Ruang Instalasi Gawat Darurat</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Ruang Laktasi Khusus Ibu & Bayi</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Dukungan Laboratorium & Farmasi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
+                <div class="row gy-4">
+                    <div class="col-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Kamar+Perawatan+1"
+                            class="img-fluid rounded shadow-sm mb-4" alt="Kamar perawatan 1">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Kamar+Perawatan+2"
+                            class="img-fluid rounded shadow-sm" alt="Kamar perawatan 2">
+                    </div>
+                    <div class="col-6">
+                        <img src="https://placehold.co/600x825/e9ecef/6c757d?text=Kamar+Perawatan+3"
+                            class="img-fluid rounded shadow-sm" alt="Kamar perawatan 3">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="services" class="services section py-5">
+    <div class="container">
+
+        <div class="row gy-4 align-items-center">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-4">
+                    <div class="col-12 col-md-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Layanan+Laboratorium"
+                            class="img-fluid rounded shadow-sm" alt="Layanan Laboratorium">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Layanan+Poli+Gigi"
+                            class="img-fluid rounded shadow-sm" alt="Layanan Poli Gigi">
+                    </div>
+                    <div class="col-12">
+                        <img src="https://placehold.co/1200x800/e9ecef/6c757d?text=Peralatan+Medis"
+                            class="img-fluid rounded shadow-sm" alt="Peralatan Medis">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="ps-lg-5">
+                    <p class="text-uppercase" style="letter-spacing: 2px; color: #888;">PELAYANAN</p>
+                    <h2 class="fw-bold display-6">Berbagai Layanan yang Disediakan untuk Anda</h2>
+                    <p class="text-muted mt-3">
+                        Sesuai dengan standar yang ditetapkan, kami menyediakan berbagai upaya pelayanan kesehatan yang
+                        komprehensif untuk memenuhi kebutuhan setiap pasien, mulai dari penanganan darurat hingga
+                        perawatan berkelanjutan.
+                    </p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Unit Gawat Darurat 24 Jam</span>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Pelayanan Rawat Jalan</span>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Fasilitas Rawat Inap</span>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Laboratorium</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Instalasi Farmasi</span>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Layanan Khitan</span>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                <span>Ambulans Siaga</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="recent-posts" class="recent-posts section py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title text-center mb-5">
+            <p class="text-uppercase" style="letter-spacing: 2px; color: #888;">LINI MASA</p>
+            <h2 class="fw-bold">Berita Terkini Klinik</h2>
+        </div>
+
+        <div class="row gy-4">
+
+            <?php
+            // Pastikan controller Anda mengirimkan variabel $beritas yang sudah di-limit, contoh: 3 berita terbaru.
+            if (!empty($beritas)):
+                $delayCounter = 100; // Inisialisasi delay animasi
+                foreach ($beritas as $berita):
+            ?>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="<?php echo $delayCounter; ?>">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a href="berita-detail.php?id=<?php echo $berita->id; ?>" class="post-img d-block"
+                        style="height: 240px; overflow: hidden;">
+                        <img src="<?php echo BASE_URL . '/uploads/berita/' . htmlspecialchars($berita->gambar); ?>"
+                            class="card-img-top w-100 h-100 object-fit-cover"
+                            alt="<?php echo htmlspecialchars($berita->judul); ?>">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            <a href="berita-detail.php?id=<?php echo $berita->id; ?>"
+                                class="text-dark text-decoration-none">
+                                <?php echo htmlspecialchars($berita->judul); ?>
+                            </a>
+                        </h5>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0 pb-3">
+                        <div class="post-meta d-flex text-muted small">
+                            <span>
+                                <i class="bi bi-person me-1"></i>
+                                <?php echo htmlspecialchars($berita->penulis ?? 'Admin'); ?>
+                            </span>
+                            <span class="mx-2">•</span>
+                            <span>
+                                <i class="bi bi-calendar-event me-1"></i>
+                                <?php
+                                        $date = new DateTime($berita->tanggal_publish);
+                                        echo $date->format('d M Y');
+                                        ?>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div><?php
+                            $delayCounter += 100; // Tambah delay untuk animasi item berikutnya
+                        endforeach;
+                    else:
+                        // Tampilan jika tidak ada berita yang tersedia
+                            ?>
+            <div class="col-12 text-center">
+                <p class="text-muted fst-italic">Belum ada berita terbaru untuk ditampilkan.</p>
+            </div>
+            <?php
+                    endif;
+            ?>
+
+        </div>
+    </div>
+</section>
