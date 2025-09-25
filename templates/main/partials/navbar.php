@@ -8,10 +8,10 @@
             <div class="contact-info d-flex align-items-center">
                 <i class="bi bi-envelope d-flex align-items-center">
                     <a
-                        href="mailto:<?php echo htmlspecialchars($contactInfo['email'] ?? ''); ?>"><?php echo htmlspecialchars($contactInfo['email'] ?? 'contact@example.com'); ?></a>
+                        href="mailto:<?php echo htmlspecialchars($contactInfo['email'] ?? ''); ?>"><?php echo htmlspecialchars($contactInfo['email'] ?? 'pkuwanareja@gmail.com'); ?></a>
                 </i>
                 <i class="bi bi-phone d-flex align-items-center ms-4">
-                    <span><?php echo htmlspecialchars($contactInfo['phone'] ?? '+1 5589 55488 55'); ?></span>
+                    <span><?php echo htmlspecialchars($contactInfo['phone'] ?? '085171031617'); ?></span>
                 </i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
@@ -24,10 +24,17 @@
     </div>
     <div class="branding d-flex align-items-center">
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.php" class="logo d-flex align-items-center me-auto">
-                <h1 class="sitename"><?php echo htmlspecialchars($siteName ?? 'Medilab'); ?></h1>
-            </a>
 
+            <a href="index.php" class="logo d-flex align-items-center me-auto">
+                <img src="<?php echo BASE_URL; ?>/assets/img/pku_wanareja.jpg" alt="Logo PKU Muhammadiyah Wanareja"
+                    style="height: 45px; max-height: 45px;">
+
+                <div class="ms-2 lh-1">
+                    <span class="d-block fw-bold text-uppercase" style="font-size: 1rem; color: #2c4964;">Klinik
+                        PKU</span>
+                    <span class="d-block text-uppercase" style="font-size: 0.8rem; color: #2c4964;">Wanareja</span>
+                </div>
+            </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.php" class="<?php echo ($currentPage === 'home') ? 'active' : ''; ?>">Home</a>

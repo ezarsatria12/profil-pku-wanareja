@@ -51,6 +51,8 @@ if (!empty($galeris)):
                         onsubmit="return confirm('Anda yakin ingin menghapus gambar ini?')">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" value="<?php echo $galeri->id; ?>">
+                        <input type="hidden" name="csrf_token"
+                            value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </div>

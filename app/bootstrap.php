@@ -10,6 +10,7 @@ require_once __DIR__ . '/config.php';
 // Pastikan kamu sudah punya file functions.php di dalam folder app/
 require_once __DIR__ . '/functions.php';
 
+require_once __DIR__ . '/csrf.php';
 // 3. (Opsional) Nantinya, kamu bisa menambahkan file lain di sini
 //    jika dibutuhkan, misalnya untuk koneksi ke database.
 // require_once __DIR__ . '/database.php';

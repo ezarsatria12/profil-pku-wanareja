@@ -1,17 +1,20 @@
 <?php
-// File: public/admin/jadwal_dokter.php
 session_start();
+// Hapus baris ini jika user tidak harus login untuk melihat halaman ini
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
 require_once __DIR__ . '/../../app/database.php';
-require_once __DIR__ . '/../../app/functions.php';
+require_once __DIR__ . '/../../app/functions.php'; // Pastikan file ini ada CSRF & Pagination
 
 // Logika Pagination
 $itemsPerPage = 10;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($currentPage < 1) {
+    $currentPage = 1;
+}
 $offset = ($currentPage - 1) * $itemsPerPage;
 
 // Ambil total jadwal untuk pagination
@@ -20,16 +23,20 @@ $totalPages = ceil($totalItems / $itemsPerPage);
 
 // Ambil data jadwal dokter untuk halaman saat ini
 $stmt = $pdo->prepare("SELECT * FROM jadwal_dokter ORDER BY FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jam_mulai ASC LIMIT ? OFFSET ?");
-$stmt->execute([$itemsPerPage, $offset]);
+$stmt->bindValue(1, $itemsPerPage, PDO::PARAM_INT);
+$stmt->bindValue(2, $offset, PDO::PARAM_INT);
+$stmt->execute();
 $jadwalDokter = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 // Mengambil "flash message" dari session
-$flashMessage = $_SESSION['flash_message'] ?? null;
-unset($_SESSION['flash_message']);
+if (isset($_SESSION['flash_message'])) {
+    $flashMessage = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']);
+}
 
 // Siapkan variabel untuk template
 $pageTitle = 'Manajemen Jadwal Dokter';
-$currentPage = 'jadwal_dokter';
+$activePage = 'jadwal_dokter'; // <-- UBAH NAMA VARIABEL INI
 $contentView = 'admin/pages/jadwal-dokter-content.php';
 
 // Panggil layout admin

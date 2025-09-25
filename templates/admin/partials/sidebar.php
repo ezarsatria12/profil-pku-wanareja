@@ -45,6 +45,15 @@ $currentPage = $currentPage ?? '';
                     <span class="nav-link-text ms-1">Galeri</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link  <?php echo ($currentPage === 'struktur-organisasi') ? 'active bg-gradient-primary' : ''; ?>"
+                    href="struktur-organisasi.php">
+                    <div class=" text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-symbols-rounded">collections</i>
+                    </div>
+                    <span class="nav-link-text ms-1">struktur Organisasi</span>
+                </a>
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs  font-weight-bolder opacity-8">Manajemen Jadwal
                 </h6>

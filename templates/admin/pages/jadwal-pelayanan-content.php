@@ -10,8 +10,8 @@
     </div>
 
     <?php if (isset($flashMessage)): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?php echo $flashMessage; ?>
+    <div class="alert alert-<?php echo $flashMessage['type']; ?> alert-dismissible fade show" role="alert">
+        <?php echo htmlspecialchars($flashMessage['message']); ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <?php endif; ?>
@@ -51,6 +51,8 @@
                                 onsubmit="return confirm('Anda yakin ingin menghapus jadwal ini?')">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="id" value="<?php echo $item->id; ?>">
+                                <input type="hidden" name="csrf_token"
+                                    value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                                 <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                             </form>
                         </td>
@@ -60,7 +62,7 @@
                 </tbody>
             </table>
         </div>
-        <?php if (!empty($jadwalPelayanan)): ?>
+        <?php if ($totalPages > 1): ?>
         <div class="card-footer d-flex justify-content-center">
             <?php echo generate_pagination_links($currentPage, $totalPages, 'jadwal_pelayanan.php'); ?>
         </div>

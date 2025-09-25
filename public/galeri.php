@@ -3,11 +3,12 @@
 
 // Langkah 1: Muat semua file aplikasi inti
 require_once __DIR__ . '/../app/bootstrap.php';
+require_once __DIR__ . '/../../app/csrf.php';
 require_once __DIR__ . '/../app/database.php'; // Pastikan koneksi DB dimuat
 
 // Langkah 2: Logika Pagination & Pengambilan Data dari Database
 // --------------------------------------------------
-
+generate_csrf_token();
 // Tentukan berapa item yang ingin ditampilkan per halaman
 $itemsPerPage = 12;
 

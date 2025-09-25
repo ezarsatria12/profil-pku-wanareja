@@ -158,19 +158,19 @@
 
                 <div class="row gy-4">
                     <div class="col-md-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Ruang+Tunggu"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/464230704fa4816e889adff77e00bb46.jpg"
                             class="img-fluid rounded shadow-sm" alt="Ruang tunggu klinik">
                     </div>
                     <div class="col-md-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Ruang+Rawat"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/row-blue-empty-chairs-wheelchair-waiting-room-hospital-scaled.jpg"
                             class="img-fluid rounded shadow-sm" alt="Ruang rawat inap">
                     </div>
                     <div class="col-md-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Poli+Gigi"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/WhatsApp-Image-2025-01-04-at-15.56.22.jpeg"
                             class="img-fluid rounded shadow-sm" alt="Poli gigi">
                     </div>
                     <div class="col-md-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Instalasi+Farmasi"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/74c96b17-0074-4a43-9720-3bded90376e8.jpg"
                             class="img-fluid rounded shadow-sm" alt="Instalasi farmasi">
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                     <h2 class="fw-bold display-6">Ibadah dalam Pelayanan dan Kemanusiaan.</h2>
                     <p class="text-muted mt-3">
                         Kami berupaya menjadi pusat pelayanan kesehatan yang profesional, bermutu tinggi,
-                        dan Islami, [cite: 69] serta selalu berkomitmen untuk memberikan pelayanan paripurna
+                        dan Islami, serta selalu berkomitmen untuk memberikan pelayanan paripurna
                         yang terjangkau bagi seluruh lapisan masyarakat.
                     </p>
 
@@ -264,13 +264,13 @@
             <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
                 <div class="row gy-4">
                     <div class="col-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Kamar+Perawatan+1"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/Kamar-Rawat-Inap-3-scaled.webp"
                             class="img-fluid rounded shadow-sm mb-4" alt="Kamar perawatan 1">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Kamar+Perawatan+2"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/Desain-tanpa-judul-6-1024x576.png"
                             class="img-fluid rounded shadow-sm" alt="Kamar perawatan 2">
                     </div>
                     <div class="col-6">
-                        <img src="https://placehold.co/600x825/e9ecef/6c757d?text=Kamar+Perawatan+3"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/Screenshot_8-1024x575.png"
                             class="img-fluid rounded shadow-sm" alt="Kamar perawatan 3">
                     </div>
                 </div>
@@ -287,15 +287,15 @@
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="row gy-4">
                     <div class="col-12 col-md-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Layanan+Laboratorium"
-                            class="img-fluid rounded shadow-sm" alt="Layanan Laboratorium">
+                        <img src="<?php echo BASE_URL; ?>/assets/img/images (1).jpg" class="img-fluid rounded shadow-sm"
+                            alt="Layanan Laboratorium">
                     </div>
                     <div class="col-12 col-md-6">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d?text=Layanan+Poli+Gigi"
-                            class="img-fluid rounded shadow-sm" alt="Layanan Poli Gigi">
+                        <img src="<?php echo BASE_URL; ?>/assets/img/images (2).jpg" class="img-fluid rounded shadow-sm"
+                            alt="Layanan Poli Gigi">
                     </div>
                     <div class="col-12">
-                        <img src="https://placehold.co/1200x800/e9ecef/6c757d?text=Peralatan+Medis"
+                        <img src="<?php echo BASE_URL; ?>/assets/img/Perbedaan-Melahirkan-di-Klinik-Bidan-dan-Rumah-Sakit-Mana-yang-Lebih-Baik-655x372.jpg"
                             class="img-fluid rounded shadow-sm" alt="Peralatan Medis">
                     </div>
                 </div>
