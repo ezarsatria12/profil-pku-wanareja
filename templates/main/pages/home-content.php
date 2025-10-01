@@ -41,7 +41,7 @@
                         pelayanan medis umum, serta ditunjang tenaga medis yang kompeten dan berpengalaman.
                     </p>
                     <div class="text-center mt-3">
-                        <a href="#about" class="btn btn-outline-primary btn-sm">Pelajari Lebih Lanjut</a>
+                        <a href="profil-pku.php" class="btn btn-outline-primary btn-sm">Pelajari Lebih Lanjut</a>
                     </div>
                 </div>
             </div>

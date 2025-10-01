@@ -12,7 +12,7 @@
     <meta name="description" content="<?php echo htmlspecialchars($metaDescription ?? ''); ?>">
     <meta name="keywords" content="<?php echo htmlspecialchars($metaKeywords ?? ''); ?>">
 
-    <link href="<?php echo BASE_URL; ?>/assets/img/favicon.png" rel="icon">
+    <link href="<?php echo BASE_URL; ?>/assets/img/pku_wanareja.jpg" rel="icon">
     <link href="<?php echo BASE_URL; ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <link href="https://fonts.googleapis.com" rel="preconnect">
