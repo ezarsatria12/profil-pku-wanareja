@@ -1,43 +1,46 @@
 <?php
 session_start();
-// Hapus baris ini jika user tidak harus login untuk melihat halaman ini
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
 
+require_once __DIR__ . '/../../app/bootstrap.php';
 require_once __DIR__ . '/../../app/database.php';
-require_once __DIR__ . '/../../app/functions.php'; // Pastikan file ini ada CSRF & Pagination
 
-// Logika Pagination
+generate_csrf_token(); // Buat token CSRF untuk form
+
+// --- LOGIKA PAGINASI ---
 $itemsPerPage = 10;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($currentPage < 1) {
-    $currentPage = 1;
-}
 $offset = ($currentPage - 1) * $itemsPerPage;
-
-// Ambil total jadwal untuk pagination
-$totalItems = $pdo->query("SELECT count(id) FROM jadwal_dokter")->fetchColumn();
+$totalItems = $pdo->query("SELECT count(id) FROM dokter")->fetchColumn();
 $totalPages = ceil($totalItems / $itemsPerPage);
 
-// Ambil data jadwal dokter untuk halaman saat ini
-$stmt = $pdo->prepare("SELECT * FROM jadwal_dokter ORDER BY FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jam_mulai ASC LIMIT ? OFFSET ?");
-$stmt->bindValue(1, $itemsPerPage, PDO::PARAM_INT);
-$stmt->bindValue(2, $offset, PDO::PARAM_INT);
+// --- Mengambil data dokter BESERTA SEMUA JADWALNYA menggunakan GROUP_CONCAT ---
+$sql = "
+    SELECT 
+        d.id, d.nama_dokter, d.spesialis, d.foto,
+        GROUP_CONCAT(
+            CONCAT(jp.hari, '|', TIME_FORMAT(jp.jam_mulai, '%H:%i'), '|', TIME_FORMAT(jp.jam_selesai, '%H:%i'))
+            ORDER BY FIELD(jp.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jp.jam_mulai
+            SEPARATOR ';'
+        ) as jadwal_list
+    FROM dokter d
+    LEFT JOIN jadwal_praktik jp ON d.id = jp.dokter_id
+    GROUP BY d.id
+    ORDER BY d.nama_dokter ASC
+    LIMIT :limit OFFSET :offset
+";
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':limit', $itemsPerPage, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
-$jadwalDokter = $stmt->fetchAll(PDO::FETCH_OBJ);
+$daftarDokter = $stmt->fetchAll(PDO::FETCH_OBJ);
+// --------------------------------------------------------------------------
 
-// Mengambil "flash message" dari session
 if (isset($_SESSION['flash_message'])) {
     $flashMessage = $_SESSION['flash_message'];
     unset($_SESSION['flash_message']);
 }
 
-// Siapkan variabel untuk template
-$pageTitle = 'Manajemen Jadwal Dokter';
-$activePage = 'jadwal_dokter'; // <-- UBAH NAMA VARIABEL INI
+$pageTitle = 'Manajemen Dokter';
+$activePage = 'jadwal_dokter';
 $contentView = 'admin/pages/jadwal-dokter-content.php';
-
-// Panggil layout admin
 include __DIR__ . '/../../templates/admin/layouts/admin-layout.php';

@@ -7,32 +7,36 @@ require_once __DIR__ . '/../app/bootstrap.php';
 require_once __DIR__ . '/../app/database.php';
 require_once __DIR__ . '/../app/functions.php'; // Panggil file functions
 
-// Langkah 2: Logika Paginasi
-// --------------------------------------------------
-$itemsPerPage = 6; // Tampilkan 6 dokter per halaman
+$itemsPerPage = 6;
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($currentPage < 1) {
-    $currentPage = 1;
-}
 $offset = ($currentPage - 1) * $itemsPerPage;
-
-// Ambil total data untuk menghitung total halaman
-$totalItems = $pdo->query("SELECT count(id) FROM jadwal_dokter")->fetchColumn();
+$totalItems = $pdo->query("SELECT count(id) FROM dokter")->fetchColumn();
 $totalPages = ceil($totalItems / $itemsPerPage);
 
-// Langkah 3: Ambil data jadwal dari database
-// --------------------------------------------------
-// Pastikan menggunakan SELECT * untuk mengambil semua kolom, termasuk 'foto'
-$stmt = $pdo->prepare("
-    SELECT * FROM jadwal_dokter 
-    ORDER BY FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jam_mulai ASC 
-    LIMIT ? OFFSET ?
-");
-$stmt->bindValue(1, $itemsPerPage, PDO::PARAM_INT);
-$stmt->bindValue(2, $offset, PDO::PARAM_INT);
-$stmt->execute();
-$jadwalDokter = $stmt->fetchAll(PDO::FETCH_OBJ);
+// --- Mengambil data dokter beserta SEMUA jadwalnya dalam satu query ---
+$sql = "
+    SELECT 
+        d.id,
+        d.nama_dokter,
+        d.spesialis,
+        d.foto,
+        GROUP_CONCAT(
+            CONCAT(jp.hari, '|', TIME_FORMAT(jp.jam_mulai, '%H:%i'), '|', TIME_FORMAT(jp.jam_selesai, '%H:%i')) 
+            ORDER BY FIELD(jp.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jp.jam_mulai
+            SEPARATOR ';'
+        ) as jadwal_list
+    FROM dokter d
+    LEFT JOIN jadwal_praktik jp ON d.id = jp.dokter_id
+    GROUP BY d.id
+    ORDER BY d.nama_dokter ASC
+    LIMIT :limit OFFSET :offset
+";
 
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':limit', $itemsPerPage, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$daftarDokter = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 // Langkah 4: Siapkan variabel yang dibutuhkan oleh template
 // --------------------------------------------------

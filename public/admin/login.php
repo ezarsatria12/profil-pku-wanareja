@@ -71,54 +71,43 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     <section class="vh-100" style="background-color: #f0f2f5;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-xl-10">
-                    <div class="card" style="border-radius: 1rem;">
-                        <div class="row g-0">
-                            <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-                                    alt="login form" class="img-fluid"
-                                    style="border-radius: 1rem 0 0 1rem; height: 100%; object-fit: cover;" />
-                            </div>
-                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                                <div class="card-body p-4 p-lg-5 text-black">
-                                    <form action="login.php" method="POST">
-                                        <!-- CSRF Token (Pengganti @csrf) -->
-                                        <input type="hidden" name="csrf_token"
-                                            value="<?php echo $_SESSION['csrf_token']; ?>">
 
-                                        <div class="d-flex align-items-center mb-3 pb-1">
-                                            <span class="h1 fw-bold mb-0">PKU Admin</span>
-                                        </div>
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 
-                                        <h5 class="fw-normal mb-3 pb-3">Masuk ke akun Anda</h5>
+                    <div class="card shadow-lg" style="border-radius: 1rem;">
+                        <div class="card-body p-4 p-lg-5 text-black">
+                            <form action="login.php" method="POST">
+                                <input type="hidden" name="csrf_token"
+                                    value="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? ''); ?>">
 
-                                        <div class="form-outline mb-4">
-                                            <label class="form-label">Email</label>
-                                            <!-- Menampilkan kembali email jika login gagal (Pengganti old()) -->
-                                            <input type="email" name="email" class="form-control form-control-lg"
-                                                value="<?php echo htmlspecialchars($old_email); ?>" required>
-                                        </div>
-
-                                        <div class="form-outline mb-4">
-                                            <label class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control form-control-lg"
-                                                required>
-                                        </div>
-
-                                        <!-- Menampilkan pesan error (Pengganti @error) -->
-                                        <?php if ($error): ?>
-                                        <div class="alert alert-danger py-2"><?php echo $error; ?></div>
-                                        <?php endif; ?>
-
-                                        <div class="pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block w-100"
-                                                type="submit">Login</button>
-                                        </div>
-
-                                        <a class="small text-muted" href="#">Lupa password?</a>
-                                    </form>
+                                <div class="d-flex align-items-center mb-3 pb-1">
+                                    <span class="h1 fw-bold mb-0">PKU Admin</span>
                                 </div>
-                            </div>
+
+                                <h5 class="fw-normal mb-3 pb-3">Masuk ke akun Anda</h5>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control form-control-lg"
+                                        value="<?php echo htmlspecialchars($old_email ?? ''); ?>" required>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-control form-control-lg"
+                                        required>
+                                </div>
+
+                                <?php if (!empty($error)): ?>
+                                <div class="alert alert-danger py-2"><?php echo htmlspecialchars($error); ?></div>
+                                <?php endif; ?>
+
+                                <div class="pt-1 mb-4">
+                                    <button class="btn btn-primary btn-lg btn-block w-100" type="submit">Login</button>
+                                </div>
+
+                                <a class="small text-muted" href="#">Lupa password?</a>
+                            </form>
                         </div>
                     </div>
                 </div>
