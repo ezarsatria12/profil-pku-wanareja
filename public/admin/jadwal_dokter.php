@@ -19,7 +19,7 @@ $sql = "
         d.id, d.nama_dokter, d.spesialis, d.foto,
         GROUP_CONCAT(
             CONCAT(jp.hari, '|', TIME_FORMAT(jp.jam_mulai, '%H:%i'), '|', TIME_FORMAT(jp.jam_selesai, '%H:%i'))
-            ORDER BY FIELD(jp.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jp.jam_mulai
+            ORDER BY FIELD(jp.hari,'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu', 'Senin - Jumat', 'Senin - Sabtu'), jp.jam_mulai
             SEPARATOR ';'
         ) as jadwal_list
     FROM dokter d

@@ -1,19 +1,19 @@
 <?php
-                        session_start();
-                        if (!isset($_SESSION['user_id'])) {
-                            header("HTTP/1.1 403 Forbidden");
-                            exit("Akses dilarang.");
-                        }
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("HTTP/1.1 403 Forbidden");
+    exit("Akses dilarang.");
+}
 
-                        require_once __DIR__ . '/../../app/database.php';
-                        require_once __DIR__ . '/../../app/functions.php';
+require_once __DIR__ . '/../../app/database.php';
+require_once __DIR__ . '/../../app/functions.php';
 
-                        // Keamanan: Hanya izinkan metode POST dan verifikasi CSRF
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-                                die('Invalid CSRF token');
-                            }
-                        }// Memanggil fungsi CSRF dari functions.php
+// Keamanan: Hanya izinkan metode POST dan verifikasi CSRF
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        die('Invalid CSRF token');
+    }
+} // Memanggil fungsi CSRF dari functions.php
 
 $dokter = null;
 $jadwalPraktik = [];
@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
     }
 
     // Ambil semua jadwal praktik yang terhubung dengan dokter ini
-    $stmt = $pdo->prepare("SELECT * FROM jadwal_praktik WHERE dokter_id = ? ORDER BY FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), jam_mulai ASC");
+    $stmt = $pdo->prepare("SELECT * FROM jadwal_praktik WHERE dokter_id = ? ORDER BY FIELD(hari,'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu', 'Senin - Jumat', 'Senin - Sabtu'), jam_mulai ASC");
     $stmt->execute([$id]);
     $jadwalPraktik = $stmt->fetchAll(PDO::FETCH_OBJ);
 }
@@ -100,7 +100,7 @@ $pageTitle = $isEdit ? 'Edit Dokter & Jadwal' : 'Tambah Dokter Baru';
                         <div class="row align-items-center mb-2 jadwal-row">
                             <div class="col-md-4 mb-2 mb-md-0">
                                 <select name="jadwal_hari[]" class="form-select">
-                                    <?php $days = ['Senin - Jumat', 'Senin - Sabtu','Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']; ?>
+                                    <?php $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu', 'Senin - Jumat', 'Senin - Sabtu']; ?>
                                     <?php foreach ($days as $day): ?>
                                     <option value="<?php echo $day; ?>"
                                         <?php echo ($day === $jadwal->hari) ? 'selected' : ''; ?>><?php echo $day; ?>
@@ -138,6 +138,8 @@ $pageTitle = $isEdit ? 'Edit Dokter & Jadwal' : 'Tambah Dokter Baru';
                     <option value="Jumat">Jumat</option>
                     <option value="Sabtu">Sabtu</option>
                     <option value="Minggu">Minggu</option>
+                    <option value="Senin - Jumat">Senin - Jumat</option>
+                    <option value="Senin - Sabtu">Senin - Sabtu</option>
                 </select></div>
             <div class="col-md-3 mb-2 mb-md-0"><input type="time" name="jadwal_jam_mulai[]" class="form-control"
                     value="08:00"></div>

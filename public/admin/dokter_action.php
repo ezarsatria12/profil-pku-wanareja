@@ -50,27 +50,20 @@ $pdo->beginTransaction(); // Mulai transaksi untuk menjaga integritas data
 
 try {
     if ($id > 0) { // Mode Update
-        $sql = "UPDATE dokter SET nama_dokter = ?, spesialis = ?, foto = ? WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-
+        $stmt = $pdo->prepare("UPDATE dokter SET nama_dokter = ?, spesialis = ?, foto = ? WHERE id = ?");
         $stmt->execute([$nama_dokter, $spesialis, $namaFileFoto, $id]);
-
         $dokter_id = $id;
-        $stmt = $pdo->prepare("SELECT foto FROM dokter WHERE id = ?");
-        $stmt->execute([$id]);
-        $namaFileFoto = $stmt->fetchColumn();
 
-        // 2. Hapus record dari tabel `dokter`
-        // (Jadwal di tabel `jadwal_praktik` akan terhapus otomatis karena ON DELETE CASCADE)
-        $stmt = $pdo->prepare("DELETE FROM dokter WHERE id = ?");
-        $stmt->execute([$id]);
+        // 2. Hapus HANYA JADWAL lama dari tabel `jadwal_praktik`
+        $stmt = $pdo->prepare("DELETE FROM jadwal_praktik WHERE dokter_id = ?");
+        $stmt->execute([$dokter_id]);
 
         // 3. Hapus file foto fisik dari server jika ada
         if ($namaFileFoto && file_exists($uploadDir . $namaFileFoto)) {
             unlink($uploadDir . $namaFileFoto);
         }
 
-        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Dokter dan semua jadwalnya berhasil dihapus.'];
+        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Data dokter berhasil diperbarui.'];
     } else { // Mode Create
         // 1. Masukkan data ke tabel `dokter`
         $stmt = $pdo->prepare("INSERT INTO dokter (nama_dokter, spesialis, foto) VALUES (?, ?, ?)");

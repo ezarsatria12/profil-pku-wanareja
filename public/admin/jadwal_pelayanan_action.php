@@ -17,8 +17,34 @@ if (!verify_csrf_token()) {
     exit;
 }
 
-// Proses Hapus
-if (isset($_POST['action']) && $_POST['action'] === 'delete') {
+$action = $_POST['action'] ?? '';
+
+if ($action === 'create' || $action === 'update') {
+    // 1. Ambil semua data dari form
+    $id = (int)($_POST['id'] ?? 0);
+    $jenis_pelayanan = trim($_POST['jenis_pelayanan'] ?? '');
+    $hari = $_POST['hari'] ?? '';
+    $jam_mulai = $_POST['jam_mulai'] ?? '';
+    $jam_selesai = $_POST['jam_selesai'] ?? '';
+    $keterangan = trim($_POST['keterangan'] ?? '');
+
+    // 2. Tentukan aksi berdasarkan nilai $action
+    if ($action === 'create') {
+        // Jika aksi 'create', jalankan perintah INSERT
+        $sql = "INSERT INTO jadwal_pelayanan (jenis_pelayanan, hari, jam_mulai, jam_selesai, keterangan) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$jenis_pelayanan, $hari, $jam_mulai, $jam_selesai, $keterangan]);
+        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Jadwal pelayanan baru berhasil ditambahkan.'];
+    } elseif ($action === 'update' && $id > 0) {
+        // Jika aksi 'update' dan ada ID, jalankan perintah UPDATE
+        $sql = "UPDATE jadwal_pelayanan SET jenis_pelayanan = ?, hari = ?, jam_mulai = ?, jam_selesai = ?, keterangan = ? WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$jenis_pelayanan, $hari, $jam_mulai, $jam_selesai, $keterangan, $id]);
+        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Jadwal pelayanan berhasil diperbarui.'];
+    }
+
+    // --- LOGIKA UNTUK MENGHAPUS DATA (Tetap ada) ---
+} elseif ($action === 'delete') {
     $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
     if ($id > 0) {
@@ -30,5 +56,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'delete') {
     }
 }
 
+// Redirect kembali ke halaman daftar setelah aksi selesai
 header("Location: jadwal_pelayanan.php");
 exit;
