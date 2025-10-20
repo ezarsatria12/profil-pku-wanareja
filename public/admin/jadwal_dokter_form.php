@@ -100,7 +100,7 @@ $pageTitle = $isEdit ? 'Edit Dokter & Jadwal' : 'Tambah Dokter Baru';
                         <div class="row align-items-center mb-2 jadwal-row">
                             <div class="col-md-4 mb-2 mb-md-0">
                                 <select name="jadwal_hari[]" class="form-select">
-                                    <?php $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']; ?>
+                                    <?php $days = ['Senin - Jumat', 'Senin - Sabtu','Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']; ?>
                                     <?php foreach ($days as $day): ?>
                                     <option value="<?php echo $day; ?>"
                                         <?php echo ($day === $jadwal->hari) ? 'selected' : ''; ?>><?php echo $day; ?>
