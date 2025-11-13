@@ -8,6 +8,7 @@ $currentPage = $currentPage ?? '';
 ?>
 <div class="sidebar border-end">
     <div class="sidebar-header border-bottom">
+        <i class="bx bx-menu menu-icon material-symbols-rounded">emergency</i>
         <div class="sidebar-brand">PKU Muhammadiyah Wanareja</div>
     </div>
 

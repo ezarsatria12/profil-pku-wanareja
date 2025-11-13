@@ -23,7 +23,7 @@
 <body class="bg-gray-100 d-flex">
 
     <?php include __DIR__ . '/../partials/sidebar.php'; ?>
-
+    <section class="overlay"></section>
     <div class="wrapper flex-grow-1 min-vh-100 d-flex flex-column">
 
         <?php include __DIR__ . '/../partials/navbar.php'; ?>
@@ -33,7 +33,21 @@
         </main>
 
     </div>
+    <script>
+    const navBar = document.querySelector("nav"),
+        menuBtns = document.querySelectorAll(".menu-icon"),
+        overlay = document.querySelector(".overlay");
 
+    menuBtns.forEach((menuBtn) => {
+        menuBtn.addEventListener("click", () => {
+            navBar.classList.toggle("open");
+        });
+    });
+
+    overlay.addEventListener("click", () => {
+        navBar.classList.remove("open");
+    });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/gh/creativetimofficial/material-dashboard@main/assets/js/material-dashboard.min.js">

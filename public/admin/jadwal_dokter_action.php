@@ -24,75 +24,88 @@ if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
 
-// --- AKSI: MEMBUAT ATAU MEMPERBARUI ---
-if ($action === 'create' || $action === 'update') {
-    $id = (int)($_POST['id'] ?? 0);
-    $nama_dokter = trim($_POST['nama_dokter'] ?? '');
-    $spesialis = trim($_POST['spesialis'] ?? '');
-    $hari = $_POST['hari'] ?? 'Senin';
-    $jam_mulai = $_POST['jam_mulai'] ?? '00:00';
-    $jam_selesai = $_POST['jam_selesai'] ?? '00:00';
-    $keterangan = trim($_POST['keterangan'] ?? '');
-    $foto_lama = $_POST['foto_lama'] ?? null;
-    $namaFileFoto = $foto_lama;
+// Mulai transaksi database
+$pdo->beginTransaction();
 
-    // --- Logika Upload Foto ---
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        $file = $_FILES['foto'];
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+try {
+    // --- AKSI: MEMBUAT ATAU MEMPERBARUI ---
+    if ($action === 'create' || $action === 'update') {
 
-        if (in_array($file['type'], $allowedTypes)) {
-            // Hapus foto lama jika ada dan file baru diupload
-            if ($foto_lama && file_exists($uploadDir . $foto_lama)) {
-                unlink($uploadDir . $foto_lama);
+        $id = (int)($_POST['id'] ?? 0);
+        $nama_dokter = trim($_POST['nama_dokter'] ?? '');
+        $spesialis = trim($_POST['spesialis'] ?? '');
+        $foto_lama = $_POST['foto_lama'] ?? null;
+        $namaFileFoto = $foto_lama;
+
+        // Logika Upload Foto
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['foto'];
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            if (in_array($file['type'], $allowedTypes)) {
+                if ($foto_lama && file_exists($uploadDir . $foto_lama)) {
+                    unlink($uploadDir . $foto_lama);
+                }
+                $namaFileFoto = uniqid('dokter-') . '-' . basename($file['name']);
+                move_uploaded_file($file['tmp_name'], $uploadDir . $namaFileFoto);
+            }
+        }
+
+        if ($action === 'update' && $id > 0) {
+            // 1. Perbarui data di tabel `dokter`
+            $stmt = $pdo->prepare("UPDATE dokter SET nama_dokter = ?, spesialis = ?, foto = ? WHERE id = ?");
+            $stmt->execute([$nama_dokter, $spesialis, $namaFileFoto, $id]);
+            $dokter_id = $id;
+
+            // 2. Hapus HANYA JADWAL lama untuk sinkronisasi
+            $stmt = $pdo->prepare("DELETE FROM jadwal_praktik WHERE dokter_id = ?");
+            $stmt->execute([$dokter_id]);
+
+            $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Data dokter berhasil diperbarui.'];
+        } else { // Mode Create
+            $stmt = $pdo->prepare("INSERT INTO dokter (nama_dokter, spesialis, foto) VALUES (?, ?, ?)");
+            $stmt->execute([$nama_dokter, $spesialis, $namaFileFoto]);
+            $dokter_id = $pdo->lastInsertId();
+            $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Dokter baru berhasil ditambahkan.'];
+        }
+
+        // 3. Masukkan kembali semua jadwal yang ada di form
+        if (!empty($_POST['jadwal_hari'])) {
+            $stmt = $pdo->prepare("INSERT INTO jadwal_praktik (dokter_id, hari, jam_mulai, jam_selesai) VALUES (?, ?, ?, ?)");
+            foreach ($_POST['jadwal_hari'] as $key => $hari) {
+                if (!empty($hari)) {
+                    $jam_mulai = $_POST['jadwal_jam_mulai'][$key];
+                    $jam_selesai = $_POST['jadwal_jam_selesai'][$key];
+                    $stmt->execute([$dokter_id, $hari, $jam_mulai, $jam_selesai]);
+                }
+            }
+        }
+
+        // --- AKSI: MENGHAPUS DOKTER ---
+    } elseif ($action === 'delete') {
+        $id = (int)($_POST['id'] ?? 0);
+        if ($id > 0) {
+            $stmt = $pdo->prepare("SELECT foto FROM dokter WHERE id = ?");
+            $stmt->execute([$id]);
+            $namaFileFoto = $stmt->fetchColumn();
+
+            // Hapus record dari tabel `dokter`. 
+            // Jadwal di `jadwal_praktik` akan terhapus otomatis karena ON DELETE CASCADE.
+            $stmt = $pdo->prepare("DELETE FROM dokter WHERE id = ?");
+            $stmt->execute([$id]);
+
+            if ($namaFileFoto && file_exists($uploadDir . $namaFileFoto)) {
+                unlink($uploadDir . $namaFileFoto);
             }
 
-            $namaFileFoto = uniqid('dokter-') . '-' . basename($file['name']);
-            if (!move_uploaded_file($file['tmp_name'], $uploadDir . $namaFileFoto)) {
-                $_SESSION['flash_message'] = ['type' => 'danger', 'message' => 'Gagal mengunggah foto.'];
-                header('Location: jadwal_dokter.php');
-                exit;
-            }
-        } else {
-            $_SESSION['flash_message'] = ['type' => 'danger', 'message' => 'Format file foto tidak valid (hanya JPG, PNG, WebP).'];
-            header('Location: jadwal_dokter_form.php' . ($id ? '?id=' . $id : ''));
-            exit;
+            $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Dokter dan semua jadwalnya berhasil dihapus.'];
         }
     }
 
-    // --- Logika Database ---
-    if ($action === 'create') {
-        $sql = "INSERT INTO jadwal_dokter (nama_dokter, foto, spesialis, hari, jam_mulai, jam_selesai, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nama_dokter, $namaFileFoto, $spesialis, $hari, $jam_mulai, $jam_selesai, $keterangan]);
-        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Jadwal dokter berhasil ditambahkan.'];
-    } elseif ($action === 'update' && $id > 0) {
-        $sql = "UPDATE jadwal_dokter SET nama_dokter = ?, foto = ?, spesialis = ?, hari = ?, jam_mulai = ?, jam_selesai = ?, keterangan = ? WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nama_dokter, $namaFileFoto, $spesialis, $hari, $jam_mulai, $jam_selesai, $keterangan, $id]);
-        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Jadwal dokter berhasil diperbarui.'];
-    }
+    $pdo->commit(); // Konfirmasi semua perubahan jika berhasil
 
-    // --- AKSI: MENGHAPUS JADWAL ---
-} elseif ($action === 'delete') {
-    $id = (int)($_POST['id'] ?? 0);
-    if ($id > 0) {
-        // Ambil nama file foto sebelum menghapus record dari database
-        $stmt = $pdo->prepare("SELECT foto FROM jadwal_dokter WHERE id = ?");
-        $stmt->execute([$id]);
-        $namaFileFoto = $stmt->fetchColumn();
-
-        // Hapus record dari database
-        $stmt = $pdo->prepare("DELETE FROM jadwal_dokter WHERE id = ?");
-        $stmt->execute([$id]);
-
-        // Jika ada nama filenya, hapus file fisik dari server
-        if ($namaFileFoto && file_exists($uploadDir . $namaFileFoto)) {
-            unlink($uploadDir . $namaFileFoto);
-        }
-
-        $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Jadwal dokter berhasil dihapus.'];
-    }
+} catch (Exception $e) {
+    $pdo->rollBack(); // Batalkan semua perubahan jika terjadi error
+    $_SESSION['flash_message'] = ['type' => 'danger', 'message' => 'Terjadi kesalahan database: ' . $e->getMessage()];
 }
 
 // Setelah semua aksi selesai, arahkan kembali ke halaman daftar

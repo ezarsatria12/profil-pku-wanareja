@@ -51,12 +51,13 @@
                             class="btn btn-sm btn-info text-white">Edit</a>
                         <form method="POST" action="dokter_action.php" class="d-inline"
                             onsubmit="return confirm('Anda yakin ingin menghapus dokter ini? Semua jadwalnya juga akan terhapus.')">
-                            <input type="hidden" name="action" value="delete"><input type="hidden" name="id"
-                                value="<?php echo $dokter->id; ?>">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="id" value="<?php echo $dokter->id; ?>">
                             <input type="hidden" name="csrf_token"
                                 value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                         </form>
+
                     </td>
                 </tr>
 

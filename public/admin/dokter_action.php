@@ -20,6 +20,7 @@ $nama_dokter = trim($_POST['nama_dokter'] ?? '');
 $spesialis = trim($_POST['spesialis'] ?? '');
 $foto_lama = $_POST['foto_lama'] ?? null;
 $namaFileFoto = $foto_lama; // Inisialisasi dengan nama foto lama
+$action = $_POST['action'] ?? '';
 
 // --- Logika Upload Foto (Sudah Diperbaiki) ---
 if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
