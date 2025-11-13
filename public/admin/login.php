@@ -12,10 +12,14 @@ if (isset($_SESSION['user_id'])) {
 
 // Muat file koneksi database
 require_once __DIR__ . '/../../app/database.php';
-
+require_once __DIR__ . '/../../app/functions.php';
+require_once __DIR__ . '/../../app/bootstrap.php';
 $error = null;
 $old_email = '';
-
+if (isset($_SESSION['flash_message'])) {
+    $flashMessage = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']);
+}
 // --- LOGIKA PEMROSESAN LOGIN (PENGGANTI FUNGSI login() DI CONTROLLER) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validasi CSRF Token
@@ -106,7 +110,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
                                     <button class="btn btn-primary btn-lg btn-block w-100" type="submit">Login</button>
                                 </div>
 
-                                <a class="small text-muted" href="#">Lupa password?</a>
+                                <a class="small text-muted" href="forgot-password.php">Lupa password?</a>
                             </form>
                         </div>
                     </div>

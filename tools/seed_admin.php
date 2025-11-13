@@ -18,7 +18,7 @@ require_once $databaseFile;
 // --- Data untuk User Admin ---
 $adminData = [
     'name' => 'Admin PKU',
-    'email' => 'cobacoba@gmail.com',
+    'email' => 'ezarsatpra737@gmail.com',
     'password' => '12345678' // Password ini akan kita hash sebelum disimpan
 ];
 
